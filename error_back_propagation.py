@@ -93,7 +93,8 @@ n_inputs = len(dataset[0]) - 1
 n_outputs = len(set([row[-1] for row in dataset]))
 network = initialize_network(n_inputs, 5, n_outputs)
 learning_rate = 0.5
-no_of_epochs = 500
+'''No. of epochs'''
+no_of_epochs = 2000
 train_network(network, dataset, learning_rate, no_of_epochs, n_outputs) 
 
 '''Fetching weights and bias from network'''
