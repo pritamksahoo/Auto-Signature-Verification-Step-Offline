@@ -9,6 +9,9 @@ import os
 print("\nExtracting signatures......\n")
 
 trainimages1 = [f for f in listdir("./Training/YES/") if isfile(join("./Training/YES/", f))]
+trainimages1 = sorted(trainimages1)
+print(trainimages1)
+# exit(1)
 count=1
 for i in trainimages1:
 	name, ext = i.split(".")
@@ -33,19 +36,22 @@ no_of_images = len(modfdimages)
 input_to_ANN = []
 for i in range(1,len(trainimages1)+1):
 	t = list(angle("./Training/MODFD/modfd"+str(i)+".jpeg"))
-	t.append(1)
+	t.append(i)
 	input_to_ANN.append(t)
+
+j = i + 1
 
 for i in range(1, len(trainimages2)+1):
 	t = list(angle("./Training/MODFD/modfd"+str(len(trainimages1)+i)+".jpeg"))
-	t.append(0)
+	t.append(j)
 	input_to_ANN.append(t)
 
 print("Done")
+# print(input_to_ANN[-3:])
+
 np.save('data_for_ANN', input_to_ANN)
 
 
-# print(input_to_ANN[:2])
 # input_to_ANN = np.array([angle("./Training/MODFD/modfd"+str(i)+".jpeg") for i in range(1,no_of_images+1)])
 # output = np.append(np.array([1]*len(trainimages1)), np.array([-1]*len(trainimages2)))
 # print(input_to_ANN)

@@ -76,7 +76,7 @@ def train_network(network, train, l_rate, n_epoch, n_outputs):
 		for row in train:
 			outputs = forward_propagate(network, row)
 			expected = [0 for i in range(n_outputs)]
-			expected[int(row[-1])] = 1
+			expected[int(row[-1])-1] = 1
 			sum_error += sum([(expected[i]-outputs[i])**2 for i in range(len(expected))])
 			backward_propagate_error(network, expected)
 			update_weights(network, row, l_rate)
@@ -90,7 +90,7 @@ print("\n\nTraining error-back propagation algorithm......", end="")
 dataset = list(np.load("data_for_ANN.npy"))
 
 n_inputs = len(dataset[0]) - 1
-n_outputs = len(set([row[-1] for row in dataset]))
+n_outputs = int((dataset[-1])[-1]) #  len(set([row[-1] for row in dataset]))
 network = initialize_network(n_inputs, 5, n_outputs)
 learning_rate = 0.5
 '''No. of epochs'''

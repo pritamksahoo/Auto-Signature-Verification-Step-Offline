@@ -32,24 +32,34 @@ def forward_propagate(network, row):
 def predict(network, row):
 	'''Making Prediction'''
 	outputs = forward_propagate(network, row)
-	return outputs.index(max(outputs))
+	# print(outputs)
+	return outputs.index(max(outputs)),max(outputs)
 
 # Taking Test Images 
 images = [f for f in listdir("./Testing/") if isfile(join("./Testing/", f))]
 network = list(np.load("weights_after_training.npy"))
-
+# print(network)
 for i in images:
 	print("\n" + str(i))
 	extract("./Testing/"+i, "./Testing/testmodfd.jpeg")
 
 	dataset = list(angle("./Testing/testmodfd.jpeg"))
 
-	img = cv2.imread("./Testing/"+i, 0)
-	pre = int(input("Enter prediction (1 for yes / 0 for no) : "))
-	dataset.append(pre)
+	# img = cv2.imread("./Testing/"+i, 0)
+	# cv2.imshow("Test", img)
+	# cv2.waitKey(0)
+	# pre = int(input("Enter prediction (1 for yes / 0 for no) : "))
+	# dataset.append(pre)
 	'''Main Function Call'''
-	prediction = predict(network, dataset)
-	
-	print('Expected=%d, Got=%d' % (pre, prediction))
-
+	prediction, match = predict(network, dataset)
+	if prediction == 11:
+		print("!!! Not a signature !!!")
+	else:
+		if match <= 0.7:
+			print("### Does not matches with any signature ###")
+		else:
+			print("Matches with img%.2d.jpg" % (prediction))
+	# print(prediction)
+	# print('Expected=%d, Got=%d' % (pre, prediction))
+	print()
 	os.remove("./Testing/testmodfd.jpeg")

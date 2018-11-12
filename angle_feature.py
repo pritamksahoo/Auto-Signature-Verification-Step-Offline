@@ -2,6 +2,8 @@ import cv2
 import numpy as np
 import math
 
+omega = 1
+
 def angle(image):
     img = cv2.imread(image, 0)
     H,W = img.shape
@@ -26,7 +28,7 @@ def angle(image):
                             no_points = no_points+1
                             act_x,act_y = r,c
                             angle = (angle+math.atan((ref_y-act_y)/(act_x-ref_x))) if (act_x-ref_x) != 0 else math.radians(angle+90)
-            angle_mat[Y][X] = angle/no_points if no_points != 0 else 0
+            angle_mat[Y][X] = omega*(math.sin(angle/no_points)) if no_points != 0 else 0
     '''
     for el in angle_mat:
         print(el)
