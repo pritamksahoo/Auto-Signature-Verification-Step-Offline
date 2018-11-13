@@ -10,7 +10,7 @@ print("\nExtracting signatures......\n")
 
 trainimages1 = [f for f in listdir("./Training/YES/") if isfile(join("./Training/YES/", f))]
 trainimages1 = sorted(trainimages1)
-print(trainimages1)
+# print(trainimages1)
 # exit(1)
 count=1
 for i in trainimages1:

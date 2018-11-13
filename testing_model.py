@@ -52,7 +52,7 @@ for i in images:
 	# dataset.append(pre)
 	'''Main Function Call'''
 	prediction, match = predict(network, dataset)
-	if prediction == 11:
+	if prediction == 12:
 		print("!!! Not a signature !!!")
 	else:
 		if match <= 0.7:
