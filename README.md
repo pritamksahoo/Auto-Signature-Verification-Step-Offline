@@ -5,3 +5,5 @@
 > Training model (FNN model - fuzzy input (**Angular fuzzy set**))
 #### python3 testing_model.py
 > Testing images
+#### weights_after_training.npy
+> Storing weights after training the error-back-propagation model
